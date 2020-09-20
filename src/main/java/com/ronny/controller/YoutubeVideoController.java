@@ -9,18 +9,24 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.JsonObjectParser;
+import com.google.api.client.json.JsonParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.ThumbnailSetResponse;
+import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoListResponse;
 import com.ronny.maingame.YoutubeVidGame;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class YoutubeVideoController {
 
@@ -60,6 +66,17 @@ public class YoutubeVideoController {
     public ThumbnailSetResponse updateThumbnail(String vidID, AbstractInputStreamContent media) throws IOException{
         YouTube.Thumbnails.Set request = youtubeService.thumbnails().set(vidID,media);
         return request.execute();
+    }
+
+    public int getDirection(String vidID) throws IOException{
+        YouTube.Videos.List request = youtubeService.videos().list("statistics").setId(vidID);
+        VideoListResponse response = request.execute();
+
+        Video main = response.getItems().get(0);
+        BigInteger likes = main.getStatistics().getLikeCount();
+        BigInteger dislikes = main.getStatistics().getDislikeCount();
+
+        return likes.compareTo(dislikes);
     }
 
 

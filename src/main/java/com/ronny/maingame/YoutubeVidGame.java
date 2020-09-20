@@ -19,6 +19,7 @@ import com.ronny.builder.GameBoardImageBuilder;
 import com.ronny.controller.GameBoardController;
 import com.ronny.controller.YoutubeVideoController;
 import com.ronny.model.game.Ball;
+import com.ronny.model.game.Game;
 import com.ronny.model.game.Paddle;
 
 
@@ -37,10 +38,12 @@ public class YoutubeVidGame {
 
     public static void main(String[] arg) throws GeneralSecurityException,IOException, GoogleJsonResponseException {
         try {
+            Game game = new Game(new Paddle(0,2),new Paddle(9,2), new Ball(5,5));
 
             YoutubeVideoController controller = YoutubeVideoController.getInstance();
             InputStreamContent mediaContent = new InputStreamContent("image/jpeg", YoutubeVidGame.class.getResourceAsStream("/Original_Doge_meme.jpg"));
             //ThumbnailSetResponse resp = controller.updateThumbnail("CRIYIDbTGdI",mediaContent);
+            //controller.getDirection("CRIYIDbTGdI");
 
             BufferedImage image = new GameBoardImageBuilder()
                     .setHeight(1000)
@@ -50,25 +53,9 @@ public class YoutubeVidGame {
                     .setPaddleWidth(100)
                     .build();
 
-            GameBoardController game = new GameBoardController(new Paddle(0,2),new Paddle(9,2), new Ball(5,5));
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();
-            game.updateGame();game.updateGame();
-            game.updateGame();
+            GameBoardController gameController = new GameBoardController(game);
 
-
-
-            //TODO Calculate the pong paddle locations.
-
-
-
+            gameController.updateGame();
 
         }catch(Exception e){
             e.printStackTrace();

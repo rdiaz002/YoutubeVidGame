@@ -1,21 +1,21 @@
 package com.ronny.controller;
 
 import com.ronny.model.game.Ball;
+import com.ronny.model.game.Game;
 import com.ronny.model.game.Paddle;
 
 public class GameBoardController{
-    private Paddle p1;
-    private Paddle p2;
-    private Ball ball;
+    private Game game;
 
-    public GameBoardController(Paddle p1, Paddle p2, Ball ball) {
-        this.p1 = p1;
-        this.p2 = p2;
-        this.ball = ball;
-        ball.setxVel(-1);
+    public GameBoardController(Game game) {
+        this.game = game;
     }
 
     public void updateGame(){
+        Paddle p1 = game.getP1();
+        Paddle p2 = game.getP2();
+        Ball ball = game.getBall();
+
         ball.setX(ball.getX()+ball.getxVel());
         ball.setY(ball.getY()+ball.getyVel());
         if((p1.getX() == ball.getX() && p1.getY() <= ball.getY() && p1.getY()+p1.PADDLE_PIXEL_WIDTH >= ball.getY()) ||
@@ -25,8 +25,6 @@ public class GameBoardController{
             System.out.println("Collision");
         }
 
-        System.out.println(ball);
-        System.out.println(p1);
-        System.out.println(p2);
+        System.out.println(game);
     }
 }

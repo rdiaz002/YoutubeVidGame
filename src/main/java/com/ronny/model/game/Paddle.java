@@ -1,8 +1,8 @@
 package com.ronny.model.game;
 
 public class Paddle {
-    public static int PADDLE_WIDTH = 100;
-    public static int PADDLE_PIXEL_WIDTH = 4;
+    public static int PADDLE_PIXEL_WIDTH = 1;
+    public static int PADDLE_PIXEL_HEIGHT = 3;
     public static int PADDLE_COUNT = 0;
     public final int id;
     private int x;

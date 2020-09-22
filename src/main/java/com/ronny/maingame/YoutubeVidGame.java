@@ -21,24 +21,28 @@ public class YoutubeVidGame {
 
     public static void main(String[] arg) throws GeneralSecurityException,IOException, GoogleJsonResponseException {
         try {
-            Game game = new Game(new Paddle(0,2),new Paddle(9,2), new Ball(5,5));
+            Game game = new Game(new Paddle(0,4),new Paddle(22,4), new Ball(11,5),23,11);
 
             YoutubeVideoController controller = YoutubeVideoController.getInstance();
-            InputStreamContent mediaContent = new InputStreamContent("image/jpeg", YoutubeVidGame.class.getResourceAsStream("/Original_Doge_meme.jpg"));
+            //InputStreamContent mediaContent = new InputStreamContent("image/jpeg", YoutubeVidGame.class.getResourceAsStream("/Original_Doge_meme.jpg"));
             //ThumbnailSetResponse resp = controller.updateThumbnail("CRIYIDbTGdI",mediaContent);
-            //controller.getDirection("CRIYIDbTGdI");
-
-            BufferedImage image = new GameBoardImageBuilder()
-                    .setHeight(1000)
-                    .setWidth(1000)
-                    .setPlayer1Pos(player1Y,PADDLE1_X)
-                    .setPlayer2Pos(player2Y,PADDLE2_X)
-                    .setPaddleWidth(100)
-                    .build();
+            controller.getDirection("CRIYIDbTGdI");
 
             GameBoardController gameController = new GameBoardController(game);
 
-            gameController.updateGame();
+            for(int i= 0; i<7 ; i++) {
+                gameController.updateGame();
+            }
+            BufferedImage image = new GameBoardImageBuilder()
+                    .setGame(game)
+                    .setHeight(1100)
+                    .setWidth(2300)
+                    .setPlayer1Pos(game.getP1())
+                    .setPlayer2Pos(game.getP2())
+                    .setBall(game.getBall())
+                    .build();
+
+
 
         }catch(Exception e){
             e.printStackTrace();

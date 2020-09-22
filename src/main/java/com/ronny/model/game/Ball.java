@@ -6,8 +6,8 @@ public class Ball {
     private int yVel = 0;
     private int xVel = 0;
 
-    private static final int BALL_WIDTH = 10;
-    private static final int BALL_HEIGHT = 10;
+    public static final int BALL_WIDTH = 1;
+    public static final int BALL_HEIGHT = 1;
 
 
     public Ball( int x, int y){

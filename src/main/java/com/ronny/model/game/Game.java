@@ -4,12 +4,32 @@ public class Game {
     private Ball ball;
     private Paddle p1;
     private Paddle p2;
+    private int pixelWidth;
+    private int pixelHeight;
 
-    public Game(Paddle p1, Paddle p2,Ball ball) {
+    public Game(Paddle p1, Paddle p2,Ball ball,int pixelWidth, int pixelHeight) {
         this.ball = ball;
         this.p1 = p1;
         this.p2 = p2;
-        this.ball.setxVel(-1);
+        this.ball.setyVel(1);
+        this.pixelHeight = pixelHeight;
+        this.pixelWidth = pixelWidth;
+    }
+
+    public int getPixelWidth() {
+        return pixelWidth;
+    }
+
+    public void setPixelWidth(int pixelWidth) {
+        this.pixelWidth = pixelWidth;
+    }
+
+    public int getPixelHeight() {
+        return pixelHeight;
+    }
+
+    public void setPixelHeight(int pixelHeight) {
+        this.pixelHeight = pixelHeight;
     }
 
     public Ball getBall() {

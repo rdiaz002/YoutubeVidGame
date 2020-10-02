@@ -79,7 +79,9 @@ public class GameBoardImageBuilder {
         g2.fillRect(p2.getX()*scaleWidth, p2.getY()*scaleHeight,Paddle.PADDLE_PIXEL_WIDTH*scaleWidth,Paddle.PADDLE_PIXEL_HEIGHT*scaleHeight);
         g2.fillRect(ball.getX()*scaleWidth, ball.getY()*scaleHeight, Ball.BALL_WIDTH*scaleWidth,Ball.BALL_HEIGHT*scaleHeight);
         g2.dispose();
-        File file = new File("myimage.jpg");
+        File dir = new File("Images");
+        dir.mkdir();
+        File file = new File("Images/myimage.jpg");
         ImageIO.write(img,"jpg",file);
 
         return img;

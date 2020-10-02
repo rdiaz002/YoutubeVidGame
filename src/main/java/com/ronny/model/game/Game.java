@@ -7,11 +7,10 @@ public class Game {
     private int pixelWidth;
     private int pixelHeight;
 
-    public Game(Paddle p1, Paddle p2,Ball ball,int pixelWidth, int pixelHeight) {
-        this.ball = ball;
-        this.p1 = p1;
-        this.p2 = p2;
-        this.ball.setyVel(1);
+    public Game(int pixelWidth, int pixelHeight) {
+        this.ball = new Ball((pixelWidth/2),(pixelHeight/2));
+        this.p1 = new Paddle(0,(pixelHeight/2)-1);
+        this.p2 = new Paddle(pixelWidth-1,(pixelHeight/2)-1);
         this.pixelHeight = pixelHeight;
         this.pixelWidth = pixelWidth;
     }

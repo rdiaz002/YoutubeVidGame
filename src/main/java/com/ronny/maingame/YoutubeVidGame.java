@@ -28,37 +28,38 @@ public class YoutubeVidGame {
 
 
             GameBoardController gameController = new GameBoardController(game);
-
-            for (int i = 0; i < 7; i++) {
-                gameController.updateGame();
-            }
-
-
-            BufferedImage image = new GameBoardImageBuilder()
+            GameBoardImageBuilder gameBoardImageBuilder = new GameBoardImageBuilder()
                     .setGame(game)
                     .setHeight(Consts.GAME_COLM * 100)
                     .setWidth(Consts.GAME_ROWS * 100)
                     .setPlayer1Pos(game.getP1())
                     .setPlayer2Pos(game.getP2())
-                    .setBall(game.getBall())
-                    .build();
+                    .setBall(game.getBall());
 
             Timer time = new Timer();
             time.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("Hello");
+                    try {
+                        //TESTS
+                        //gameController.moveP1Paddle(1);
+                        //gameController.moveP2Paddle(-1);
+                        //TODO: add missing logic
+                        BufferedImage image = gameBoardImageBuilder.build();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }, Date.from(Instant.now()),60000);
+            }, Date.from(Instant.now()), 60000);
 
-            InputStreamContent mediaContent = new InputStreamContent("image/jpeg", new BufferedInputStream(new FileInputStream("Images/myimage.jpg")));
+            //InputStreamContent mediaContent = new InputStreamContent("image/jpeg", new BufferedInputStream(new FileInputStream("Images/myimage.jpg")));
             //ThumbnailSetResponse resp = controller.updateThumbnail(Consts.P1_VIDEO_ID,mediaContent);
             //            controller.getDirection(Consts.P1_VIDEO_ID);
             //            controller.getDirection(Consts.P2_VIDEO_ID);
 
             Scanner myobj = new Scanner(System.in);
-            String in="";
-            while(in.compareToIgnoreCase("q")!=0){
+            String in = "";
+            while (in.compareToIgnoreCase("q") != 0) {
                 in = myobj.nextLine();
             }
             time.cancel();

@@ -45,4 +45,30 @@ public class GameBoardController{
 
         System.out.println(game);
     }
+    private void correctPaddleToWallCollision(Paddle p){
+        if(p.getY()+Paddle.PADDLE_PIXEL_HEIGHT> game.getPixelHeight()){
+            p.setY(p.getY()-1);
+        }else if(p.getY() < 0){
+            p.setY(p.getY()+1);
+        }
+        System.out.println("Corrected");
+    }
+    public void moveP1Paddle(int direction){
+        Paddle p1 = game.getP1();
+        if(direction > 0){
+            p1.setY(p1.getY()-1);
+        }else if (direction <0){
+            p1.setY(p1.getY()+1);
+        }
+        correctPaddleToWallCollision(p1);
+    }
+    public void moveP2Paddle(int direction){
+        Paddle p2 = game.getP2();
+        if(direction > 0){
+            p2.setY(p2.getY()-1);
+        }else if (direction <0){
+            p2.setY(p2.getY()+1);
+        }
+        correctPaddleToWallCollision(p2);
+    }
 }

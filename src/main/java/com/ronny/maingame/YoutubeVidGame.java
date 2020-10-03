@@ -12,6 +12,11 @@ import com.ronny.model.game.Game;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.time.Instant;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class YoutubeVidGame {
 
@@ -19,7 +24,7 @@ public class YoutubeVidGame {
         try {
             Game game = new Game(Consts.GAME_ROWS, Consts.GAME_COLM);
 
-            YoutubeVideoController controller = YoutubeVideoController.getInstance();
+            //YoutubeVideoController controller = YoutubeVideoController.getInstance();
 
 
             GameBoardController gameController = new GameBoardController(game);
@@ -38,10 +43,26 @@ public class YoutubeVidGame {
                     .setBall(game.getBall())
                     .build();
 
+            Timer time = new Timer();
+            time.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println("Hello");
+                }
+            }, Date.from(Instant.now()),60000);
+
             InputStreamContent mediaContent = new InputStreamContent("image/jpeg", new BufferedInputStream(new FileInputStream("Images/myimage.jpg")));
             //ThumbnailSetResponse resp = controller.updateThumbnail(Consts.P1_VIDEO_ID,mediaContent);
             //            controller.getDirection(Consts.P1_VIDEO_ID);
             //            controller.getDirection(Consts.P2_VIDEO_ID);
+
+            Scanner myobj = new Scanner(System.in);
+            String in="";
+            while(in.compareToIgnoreCase("q")!=0){
+                in = myobj.nextLine();
+            }
+            time.cancel();
+
 
         } catch (Exception e) {
             e.printStackTrace();
